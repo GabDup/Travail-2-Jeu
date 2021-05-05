@@ -25,9 +25,9 @@ namespace Travail_2
         int spaceshipHeight = 130;
         int laserWidth = 50;
         int laserHeight = 90;
-        int playerSpeed = 20;
+        int playerSpeed = 10;
         //int asteroidSpeed = 1;
-        int laserSpeed = 15;
+        int laserSpeed = 20;
 
         public frmJeu()
         {
@@ -122,13 +122,17 @@ namespace Travail_2
             {
                 playerInput.SetGoRight(true);
             }
-            if (e.KeyCode == Keys.Up)
+            else if (e.KeyCode == Keys.Up)
             {
                 playerInput.SetGoUp(true);
             }
             else if (e.KeyCode == Keys.Down)
             {
                 playerInput.SetGoDown(true);
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
             }
         }
 
@@ -149,13 +153,6 @@ namespace Travail_2
             else if (e.KeyCode == Keys.Down)
             {
                 playerInput.SetGoDown(false);
-            }
-            else
-            {
-                playerInput.SetGoDown(false);
-                playerInput.SetGoLeft(false);
-                playerInput.SetGoRight(false);
-                playerInput.SetGoUp(false);
             }
         }
     }

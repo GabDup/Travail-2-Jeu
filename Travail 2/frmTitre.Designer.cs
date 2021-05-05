@@ -75,10 +75,10 @@ namespace Travail_2
             // lstInformation
             // 
             this.lstInformation.FormattingEnabled = true;
-            this.lstInformation.Location = new System.Drawing.Point(221, 12);
+            this.lstInformation.Location = new System.Drawing.Point(233, 12);
             this.lstInformation.Name = "lstInformation";
             this.lstInformation.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lstInformation.Size = new System.Drawing.Size(395, 225);
+            this.lstInformation.Size = new System.Drawing.Size(383, 225);
             this.lstInformation.TabIndex = 3;
             // 
             // frmTitre

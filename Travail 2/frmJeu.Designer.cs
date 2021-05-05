@@ -1,6 +1,6 @@
 ﻿namespace Travail_2
 {
-    partial class Form1
+    partial class frmJeu
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -38,14 +38,16 @@
             this.GameTimer.Interval = 20;
             this.GameTimer.Tick += new System.EventHandler(this.GameTimer_Tick);
             // 
-            // Form1
+            // frmJeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1280, 720);
             this.DoubleBuffered = true;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmJeu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Jeu";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);

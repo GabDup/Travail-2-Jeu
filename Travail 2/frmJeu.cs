@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Travail_2
 {
-    public partial class Form1 : Form
+    public partial class frmJeu : Form
     {
         PlayerInput playerInput;
         List<Enemies> enemies = new List<Enemies>();
@@ -19,8 +19,8 @@ namespace Travail_2
         Bitmap gameImage;
         int playerPositionX = 0;
         int playerPositionY = 0;
-        int mapWidth = 1500;
-        int mapHeight = 1000;
+        int mapWidth = 1280;
+        int mapHeight = 720;
         int spaceshipWidth = 90;
         int spaceshipHeight = 130;
         int laserWidth = 50;
@@ -29,7 +29,7 @@ namespace Travail_2
         //int asteroidSpeed = 1;
         int laserSpeed = 15;
 
-        public Form1()
+        public frmJeu()
         {
             InitializeComponent();
         }

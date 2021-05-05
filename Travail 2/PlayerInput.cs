@@ -12,6 +12,7 @@ namespace Travail_2
         bool goRight;
         bool goUp;
         bool goDown;
+        bool laser;
 
         public PlayerInput()
         {

@@ -87,7 +87,7 @@ namespace Travail_2
             }
             else if (playerInput.GetGoRight())
             {
-                if (playerPositionX < 1020 - spaceshipWidth)
+                if (playerPositionX < 1280 - spaceshipWidth)
                 {
                     playerPositionX = playerPositionX + playerSpeed;
                 }
@@ -101,7 +101,7 @@ namespace Travail_2
             }
             else if (playerInput.GetGoDown())
             {
-                if (playerPositionY < 760 - spaceshipHeight)
+                if (playerPositionY < 720 - spaceshipHeight)
                 {
                     playerPositionY = playerPositionY + playerSpeed;
                 }
@@ -132,6 +132,7 @@ namespace Travail_2
             }
             else if (e.KeyCode == Keys.Escape)
             {
+                this.Dispose();
                 this.Close();
             }
         }

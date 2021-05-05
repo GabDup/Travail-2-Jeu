@@ -122,7 +122,6 @@ namespace Travail_2
             {
                 playerInput.SetGoDown(true);
             }
-
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -143,7 +142,13 @@ namespace Travail_2
             {
                 playerInput.SetGoDown(false);
             }
-
+            else
+            {
+                playerInput.SetGoDown(false);
+                playerInput.SetGoLeft(false);
+                playerInput.SetGoRight(false);
+                playerInput.SetGoUp(false);
+            }
         }
     }
 }

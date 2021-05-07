@@ -27,8 +27,8 @@ namespace Travail_2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            managerJeu = new ManagerJeu();
-
+            managerJeu = new ManagerJeu(this.Width,this.Height);
+            
             Image background = Image.FromFile("../../Images/bg_space_seamless_1.png");
             Image spaceship = Image.FromFile("../../Images/flashtestship.png");
             Image laser = Image.FromFile("../../Images/laser_beam.png");
@@ -50,10 +50,10 @@ namespace Travail_2
             //}
             //MessageBox.Show(managerJeu.GetEnemies().Count().ToString());
 
-            gameImage = new Bitmap(managerJeu.GetMapWidth(), managerJeu.GetMapHeight());
+            gameImage = new Bitmap(this.Width, this.Height);
 
-            managerJeu.GetPlayerInput().SetPositionX(managerJeu.GetMapWidth() / 2 - managerJeu.GetPlayerInput().GetPlayerWidth() / 2);
-            managerJeu.GetPlayerInput().SetPositionY(managerJeu.GetMapHeight() / 2 - managerJeu.GetPlayerInput().GetPlayerHeight() / 2);
+            managerJeu.GetPlayerInput().SetPositionX(this.Width / 2 - managerJeu.GetPlayerInput().GetPlayerWidth() / 2);
+            managerJeu.GetPlayerInput().SetPositionY(this.Height / 2 - managerJeu.GetPlayerInput().GetPlayerHeight() / 2);
             managerJeu.GetEnemies().Add(new Enemies());
 
             GameTimer.Start();
@@ -61,7 +61,7 @@ namespace Travail_2
         private void Draw()
         {
             gameImage.Dispose();
-            gameImage = new Bitmap(managerJeu.GetMapWidth(), managerJeu.GetMapHeight());
+            gameImage = new Bitmap(this.Width, this.Height);
 
             using (Graphics graphics = Graphics.FromImage(gameImage))
             {
@@ -80,28 +80,28 @@ namespace Travail_2
         {
             if (managerJeu.GetPlayerInput().GetGoLeft())
             {
-                if (managerJeu.GetPlayerInput().GetPositionX() > 10)
+                if (managerJeu.GetPlayerInput().GetPositionX() > 0)
                 {
                     managerJeu.GetPlayerInput().SetPositionX(managerJeu.GetPlayerInput().GetPositionX() - managerJeu.GetPlayerInput().GetPlayerSpeed());
                 }
             }
             else if (managerJeu.GetPlayerInput().GetGoRight())
             {
-                if (managerJeu.GetPlayerInput().GetPositionX() < 1280 - managerJeu.GetPlayerInput().GetPlayerWidth())
+                if (managerJeu.GetPlayerInput().GetPositionX() < this.Width - managerJeu.GetPlayerInput().GetPlayerWidth())
                 {
                     managerJeu.GetPlayerInput().SetPositionX(managerJeu.GetPlayerInput().GetPositionX() + managerJeu.GetPlayerInput().GetPlayerSpeed());
                 }
             }
             if (managerJeu.GetPlayerInput().GetGoUp())
             {
-                if (managerJeu.GetPlayerInput().GetPositionY() > 10)
+                if (managerJeu.GetPlayerInput().GetPositionY() > 0)
                 {
                     managerJeu.GetPlayerInput().SetPositionY(managerJeu.GetPlayerInput().GetPositionY() - managerJeu.GetPlayerInput().GetPlayerSpeed());
                 }
             }
             else if (managerJeu.GetPlayerInput().GetGoDown())
             {
-                if (managerJeu.GetPlayerInput().GetPositionY() < 720 - managerJeu.GetPlayerInput().GetPlayerHeight())
+                if (managerJeu.GetPlayerInput().GetPositionY() < this.Height - managerJeu.GetPlayerInput().GetPlayerHeight())
                 {
                     managerJeu.GetPlayerInput().SetPositionY(managerJeu.GetPlayerInput().GetPositionY() + managerJeu.GetPlayerInput().GetPlayerSpeed());
                 }

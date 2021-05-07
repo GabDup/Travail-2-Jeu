@@ -11,16 +11,16 @@ namespace Travail_2
         PlayerInput playerInput;
         List<Enemies> enemies;
         Laser laser;
-        int mapWidth = 1280;
-        int mapHeight = 720;
+        int mapWidth;
+        int mapHeight;
 
-        public ManagerJeu()
+        public ManagerJeu(int MapWidth, int MapHeight)
         {
             playerInput = new PlayerInput();
             enemies = new List<Enemies>();
             laser = new Laser();
-            mapWidth = 1280;
-            mapHeight = 720;
+            mapWidth = MapWidth;
+            mapHeight = MapHeight;
         }
 
         public int GetMapWidth()

@@ -20,7 +20,7 @@ namespace Travail_2
         {
             asteroidSpeed = 5;
             positionY = 0;
-            positionX = random.Next(50, 1400);
+            positionX = random.Next(50, 1230);
             asteroidWidth = 50;
             asteroidHeight = 75;
         }
@@ -28,7 +28,7 @@ namespace Travail_2
         //fonction pour changer la positionY par rapport a la vitesse et regarder si il est en dehors de l'ecran, si oui, effacer dans la form
         public int ChangerPositionY()
         {
-            return positionY -= positionY + asteroidSpeed;
+            return positionY = positionY + asteroidSpeed;
         }
         public int GetAsteroidPositionY()
         {

@@ -12,22 +12,13 @@ namespace Travail_2
 {
     public partial class frmJeu : Form
     {
-        PlayerInput playerInput;
-        List<Enemies> enemies = new List<Enemies>();
         Bitmap backgroundImage;
         Bitmap spaceshipImage;
+        Bitmap asteroidImage;
+        Bitmap laserImage;
         Bitmap gameImage;
-        int playerPositionX = 0;
-        int playerPositionY = 0;
-        int mapWidth = 1280;
-        int mapHeight = 720;
-        int spaceshipWidth = 90;
-        int spaceshipHeight = 130;
-        int laserWidth = 50;
-        int laserHeight = 90;
-        int playerSpeed = 10;
-        //int asteroidSpeed = 1;
-        int laserSpeed = 20;
+
+        ManagerJeu managerJeu;
 
         public frmJeu()
         {
@@ -36,79 +27,89 @@ namespace Travail_2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            managerJeu = new ManagerJeu();
+
             Image background = Image.FromFile("../../Images/bg_space_seamless_1.png");
             Image spaceship = Image.FromFile("../../Images/flashtestship.png");
             Image laser = Image.FromFile("../../Images/laser_beam.png");
+            Image asteroid = Image.FromFile("../../Images/Asteroid.png");
 
-            backgroundImage = new Bitmap(background, mapWidth, mapHeight);
-            spaceshipImage = new Bitmap(spaceship, spaceshipWidth, spaceshipHeight);
-            gameImage = new Bitmap(mapWidth, mapHeight);
+            backgroundImage = new Bitmap(background, managerJeu.GetMapWidth(), managerJeu.GetMapHeight());
+            spaceshipImage = new Bitmap(spaceship, managerJeu.GetPlayerInput().GetPlayerWidth(), managerJeu.GetPlayerInput().GetPlayerHeight());
+            laserImage = new Bitmap(laser, managerJeu.GetLaser().GetLaserWidth(), managerJeu.GetLaser().GetLaserHeight());
 
-            playerPositionX = mapWidth / 2 - spaceshipWidth / 2;
-            playerPositionY = mapHeight / 2 - spaceshipHeight / 2;
+            //for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
+            //{
+            //    asteroidImage = new Bitmap(asteroid, managerJeu.GetEnemies()[i].GetAsteroidWidth(), managerJeu.GetEnemies()[i].GetAsteroidHeight());
+            //}
 
-            Width = mapWidth;
-            Height = mapHeight;
+            //Enemies nouveauAsteroid = new Enemies();
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    managerJeu.GetEnemies().Add(nouveauAsteroid);
+            //}
+            //MessageBox.Show(managerJeu.GetEnemies().Count().ToString());
 
-            playerInput = new PlayerInput();
+            gameImage = new Bitmap(managerJeu.GetMapWidth(), managerJeu.GetMapHeight());
 
-            enemies.Add(new Enemies());
+            managerJeu.GetPlayerInput().SetPositionX(managerJeu.GetMapWidth() / 2 - managerJeu.GetPlayerInput().GetPlayerWidth() / 2);
+            managerJeu.GetPlayerInput().SetPositionY(managerJeu.GetMapHeight() / 2 - managerJeu.GetPlayerInput().GetPlayerHeight() / 2);
+            managerJeu.GetEnemies().Add(new Enemies());
 
             GameTimer.Start();
         }
-
-        //fonction pour deplacement asteroid et effacer si offscreen=true
-        //fonction pour deplacement laser et effacer si offscreen=true
-
         private void Draw()
         {
             gameImage.Dispose();
-            gameImage = new Bitmap(mapWidth, mapHeight);
+            gameImage = new Bitmap(managerJeu.GetMapWidth(), managerJeu.GetMapHeight());
 
             using (Graphics graphics = Graphics.FromImage(gameImage))
             {
                 graphics.DrawImage(backgroundImage, 0, 0);
-                graphics.DrawImage(spaceshipImage, playerPositionX, playerPositionY);
-                graphics.DrawImage(enemies[0].GetAsteroidImage(), enemies[0].GetAsteroidPositionX(), enemies[0].GetAsteroidPositionY());
-                //afficher plusieurs asteroids (foreach)
+                graphics.DrawImage(spaceshipImage, managerJeu.GetPlayerInput().GetPositionX(), managerJeu.GetPlayerInput().GetPositionY());
+
+                //for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
+                //{
+                //    graphics.DrawImage(asteroidImage, managerJeu.GetEnemies()[i].GetAsteroidPositionX(), managerJeu.GetEnemies()[i].GetAsteroidPositionY());
+                //}
             }
 
             this.BackgroundImage = gameImage;
-
         }
         private void GameTimer_Tick(object sender, EventArgs e)
         {
-            if (playerInput.GetGoLeft())
+            if (managerJeu.GetPlayerInput().GetGoLeft())
             {
-                if (playerPositionX > 10)
+                if (managerJeu.GetPlayerInput().GetPositionX() > 10)
                 {
-                    playerPositionX = playerPositionX - playerSpeed;
+                    managerJeu.GetPlayerInput().SetPositionX(managerJeu.GetPlayerInput().GetPositionX() - managerJeu.GetPlayerInput().GetPlayerSpeed());
                 }
             }
-            else if (playerInput.GetGoRight())
+            else if (managerJeu.GetPlayerInput().GetGoRight())
             {
-                if (playerPositionX < 1280 - spaceshipWidth)
+                if (managerJeu.GetPlayerInput().GetPositionX() < 1280 - managerJeu.GetPlayerInput().GetPlayerWidth())
                 {
-                    playerPositionX = playerPositionX + playerSpeed;
+                    managerJeu.GetPlayerInput().SetPositionX(managerJeu.GetPlayerInput().GetPositionX() + managerJeu.GetPlayerInput().GetPlayerSpeed());
                 }
             }
-            if (playerInput.GetGoUp())
+            if (managerJeu.GetPlayerInput().GetGoUp())
             {
-                if (playerPositionY > 10)
+                if (managerJeu.GetPlayerInput().GetPositionY() > 10)
                 {
-                    playerPositionY = playerPositionY - playerSpeed;
+                    managerJeu.GetPlayerInput().SetPositionY(managerJeu.GetPlayerInput().GetPositionY() - managerJeu.GetPlayerInput().GetPlayerSpeed());
                 }
             }
-            else if (playerInput.GetGoDown())
+            else if (managerJeu.GetPlayerInput().GetGoDown())
             {
-                if (playerPositionY < 720 - spaceshipHeight)
+                if (managerJeu.GetPlayerInput().GetPositionY() < 720 - managerJeu.GetPlayerInput().GetPlayerHeight())
                 {
-                    playerPositionY = playerPositionY + playerSpeed;
+                    managerJeu.GetPlayerInput().SetPositionY(managerJeu.GetPlayerInput().GetPositionY() + managerJeu.GetPlayerInput().GetPlayerSpeed());
                 }
             }
-
-            enemies[0].ChangerPositionY();
-
+            for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
+            {
+                managerJeu.GetEnemies()[i].ChangerPositionY();
+            }
             Draw();
         }
 
@@ -116,24 +117,28 @@ namespace Travail_2
         {
             if (e.KeyCode == Keys.Left)
             {
-                playerInput.SetGoLeft(true);
+                managerJeu.GetPlayerInput().SetGoLeft(true);
             }
             else if (e.KeyCode == Keys.Right)
             {
-                playerInput.SetGoRight(true);
+                managerJeu.GetPlayerInput().SetGoRight(true);
             }
             else if (e.KeyCode == Keys.Up)
             {
-                playerInput.SetGoUp(true);
+                managerJeu.GetPlayerInput().SetGoUp(true);
             }
             else if (e.KeyCode == Keys.Down)
             {
-                playerInput.SetGoDown(true);
+                managerJeu.GetPlayerInput().SetGoDown(true);
             }
             else if (e.KeyCode == Keys.Escape)
             {
                 this.Dispose();
                 this.Close();
+            }
+            else if (e.KeyCode == Keys.Space)
+            {
+                managerJeu.GetLaser().Fire();
             }
         }
 
@@ -141,19 +146,19 @@ namespace Travail_2
         {
             if (e.KeyCode == Keys.Left)
             {
-                playerInput.SetGoLeft(false);
+                managerJeu.GetPlayerInput().SetGoLeft(false);
             }
             else if (e.KeyCode == Keys.Right)
             {
-                playerInput.SetGoRight(false);
+                managerJeu.GetPlayerInput().SetGoRight(false);
             }
             else if (e.KeyCode == Keys.Up)
             {
-                playerInput.SetGoUp(false);
+                managerJeu.GetPlayerInput().SetGoUp(false);
             }
             else if (e.KeyCode == Keys.Down)
             {
-                playerInput.SetGoDown(false);
+                managerJeu.GetPlayerInput().SetGoDown(false);
             }
         }
     }

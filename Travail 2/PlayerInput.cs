@@ -12,7 +12,11 @@ namespace Travail_2
         bool goRight;
         bool goUp;
         bool goDown;
-        bool laser;
+        int playerPositionX = 0;
+        int playerPositionY = 0;
+        int playerSpeed = 10;
+        int playerWidth = 90;
+        int playerHeight = 130;
 
         public PlayerInput()
         {
@@ -20,11 +24,26 @@ namespace Travail_2
             goRight = false;
             goUp = false;
             goDown = false;
+            playerPositionX = 0;
+            playerPositionY = 0;
+            playerSpeed = 10;
+            playerWidth = 90;
+            playerHeight = 130;
         }
 
         public bool GetGoLeft()
         {
             return goLeft;
+        }
+
+        public int GetPositionY()
+        {
+            return playerPositionY;
+        }
+
+        public int GetPositionX()
+        {
+            return playerPositionX;
         }
 
         public void SetGoLeft(bool goleft)
@@ -42,9 +61,29 @@ namespace Travail_2
             goRight = goright;
         }
 
+        public int GetPlayerWidth()
+        {
+            return playerWidth;
+        }
+
+        public void SetPositionX(int positionX)
+        {
+            playerPositionX = positionX;
+        }
+
+        public void SetPositionY(int positionY)
+        {
+            playerPositionY = positionY;
+        }
+
         public bool GetGoUp()
         {
             return goUp;
+        }
+
+        public int GetPlayerHeight()
+        {
+            return playerHeight;
         }
 
         public void SetGoUp(bool goup)
@@ -60,6 +99,11 @@ namespace Travail_2
         public void SetGoDown(bool godown)
         {
             goDown = godown;
+        }
+
+        public int GetPlayerSpeed()
+        {
+            return playerSpeed;
         }
     }
 }

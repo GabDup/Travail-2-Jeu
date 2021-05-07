@@ -22,7 +22,7 @@ namespace Travail_2
             lstInformation.Items.Add("Travail #2");
             lstInformation.Items.Add("Par Antoine L'Archer et Gabriel Duperré");
             lstInformation.Items.Add("Mai 2021");
-            lstInformation.Items.Add("F : Tirer / Flèches : Bouger / Esc : Quitter");
+            lstInformation.Items.Add("Espace : Tirer / Flèches : Bouger / Esc : Quitter");
         }
 
         private void btnQuitter_Click(object sender, EventArgs e)

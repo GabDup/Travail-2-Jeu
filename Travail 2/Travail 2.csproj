@@ -66,6 +66,7 @@
       <DependentUpon>frmParametre.cs</DependentUpon>
     </Compile>
     <Compile Include="Laser.cs" />
+    <Compile Include="ManagerJeu.cs" />
     <Compile Include="PlayerInput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

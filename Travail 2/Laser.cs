@@ -7,35 +7,27 @@ using System.Drawing;
 namespace Travail_2
 {
     class Laser
-    {
-        
-        bool isOffScreen;
-        int lasertSpeed;
-        int positionY;
-        int positionX;
+    {        
+        int laserSpeed;
         int laserWidth;
         int laserHeight;
-        Image Lazer = Image.FromFile("../../Images/laser_beam.png");
-        Bitmap laserImage;
+        PlayerInput player;
+        int positionY;
+        int positionX;
+
         public Laser()
         {
-            isOffScreen = false;
-            lasertSpeed = 5;
-            positionY = 0;
-            positionX = 0;
+            laserSpeed = 5;
             laserWidth = 50;
             laserHeight = 75;
-            laserImage = new Bitmap(Lazer, laserWidth, laserHeight);
-
+            player = new PlayerInput();
+            positionY = player.GetPositionY();
+            positionX = player.GetPositionX();
         }
-        //fonction pour changer la positionY par rapport a la vitesse et regarder si il est en dehors de l'ecran, si oui, effacer dans la form
+
         public int ChangerPositionY()
         {
-            return positionY = positionY + lasertSpeed;
-        }
-        public Bitmap GetAsteroidImage()
-        {
-            return laserImage;
+            return positionY = positionY + laserSpeed;
         }
         public int GetAsteroidPositionY()
         {
@@ -47,8 +39,22 @@ namespace Travail_2
         }
         public int GetAsteroidSpeed()
         {
-            return lasertSpeed;
+            return laserSpeed;
+        }
+
+        public int GetLaserHeight()
+        {
+            return laserHeight;
+        }
+
+        public int GetLaserWidth()
+        {
+            return laserWidth;
+        }
+
+        public void Fire()
+        {
+
         }
     }
-}
 }

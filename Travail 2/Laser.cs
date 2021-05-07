@@ -20,7 +20,7 @@ namespace Travail_2
         public Laser()
         {
             isOffScreen = false;
-            lasertSpeed = 5;
+            lasertSpeed = 10;
             positionY = 0;
             positionX = 0;
             laserWidth = 50;
@@ -50,5 +50,4 @@ namespace Travail_2
             return lasertSpeed;
         }
     }
-}
 }

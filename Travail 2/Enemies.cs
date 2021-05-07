@@ -23,7 +23,7 @@ namespace Travail_2
             isOffScreen = false;
             asteroidSpeed = 5;
             positionY = 0;
-            positionX = random.Next(50, 1400);
+            positionX = random.Next(50, 1230);
             asteroidWidth = 50;
             asteroidHeight = 75;
             asteroidImage = new Bitmap(Asteroid, asteroidWidth, asteroidHeight);
@@ -33,6 +33,10 @@ namespace Travail_2
         public int ChangerPositionY()
         {
             return positionY = positionY + asteroidSpeed;
+        }
+        public void SetIsOffScreen(bool isoffscreen)
+        {
+            isOffScreen = isoffscreen;
         }
         public Bitmap GetAsteroidImage()
         {

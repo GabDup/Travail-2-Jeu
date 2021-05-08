@@ -17,7 +17,7 @@ namespace Travail_2
         Bitmap asteroidImage;
         Bitmap laserImage;
         Bitmap gameImage;
-
+        Random random = new Random();
         ManagerJeu managerJeu;
 
         public frmJeu()
@@ -36,25 +36,23 @@ namespace Travail_2
 
             backgroundImage = new Bitmap(background, managerJeu.GetMapWidth(), managerJeu.GetMapHeight());
             spaceshipImage = new Bitmap(spaceship, managerJeu.GetPlayerInput().GetPlayerWidth(), managerJeu.GetPlayerInput().GetPlayerHeight());
-            laserImage = new Bitmap(laser, managerJeu.GetLaser().GetLaserWidth(), managerJeu.GetLaser().GetLaserHeight());
+            laserImage = new Bitmap(laser, managerJeu.GetLaser().GetLaserWidth(), managerJeu.GetLaser().GetLaserHeight());                        
 
-            //for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
-            //{
-            //    asteroidImage = new Bitmap(asteroid, managerJeu.GetEnemies()[i].GetAsteroidWidth(), managerJeu.GetEnemies()[i].GetAsteroidHeight());
-            //}
+            for (int i = 0; i < 5; i++)
+            {
+                Enemies nouveauAsteroid = new Enemies(random.Next(0, this.Width));
+                managerJeu.GetEnemies().Add(nouveauAsteroid);
+            }
 
-            //Enemies nouveauAsteroid = new Enemies();
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    managerJeu.GetEnemies().Add(nouveauAsteroid);
-            //}
-            //MessageBox.Show(managerJeu.GetEnemies().Count().ToString());
-
+            for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
+            {
+                asteroidImage = new Bitmap(asteroid, managerJeu.GetEnemies()[i].GetAsteroidWidth(), managerJeu.GetEnemies()[i].GetAsteroidHeight());
+            }
+            
             gameImage = new Bitmap(this.Width, this.Height);
 
             managerJeu.GetPlayerInput().SetPositionX(this.Width / 2 - managerJeu.GetPlayerInput().GetPlayerWidth() / 2);
             managerJeu.GetPlayerInput().SetPositionY(this.Height / 2 - managerJeu.GetPlayerInput().GetPlayerHeight() / 2);
-            managerJeu.GetEnemies().Add(new Enemies());
 
             GameTimer.Start();
         }
@@ -62,16 +60,15 @@ namespace Travail_2
         {
             gameImage.Dispose();
             gameImage = new Bitmap(this.Width, this.Height);
-
             using (Graphics graphics = Graphics.FromImage(gameImage))
             {
                 graphics.DrawImage(backgroundImage, 0, 0);
                 graphics.DrawImage(spaceshipImage, managerJeu.GetPlayerInput().GetPositionX(), managerJeu.GetPlayerInput().GetPositionY());
 
-                //for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
-                //{
-                //    graphics.DrawImage(asteroidImage, managerJeu.GetEnemies()[i].GetAsteroidPositionX(), managerJeu.GetEnemies()[i].GetAsteroidPositionY());
-                //}
+                for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
+                {
+                    graphics.DrawImage(asteroidImage, managerJeu.GetEnemies()[i].GetAsteroidPositionX(), managerJeu.GetEnemies()[i].GetAsteroidPositionY());
+                }
             }
 
             this.BackgroundImage = gameImage;

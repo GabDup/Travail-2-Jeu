@@ -7,13 +7,13 @@ using System.Drawing;
 namespace Travail_2
 {
     class Laser
-    {        
-        int laserSpeed;
-        int laserWidth;
-        int laserHeight;
-        PlayerInput player;
-        int positionY;
-        int positionX;
+    {
+        private int laserSpeed;
+        private int laserWidth;
+        private int laserHeight;
+        private PlayerInput player;
+        private int positionY;
+        private int positionX;
 
         public Laser()
         {

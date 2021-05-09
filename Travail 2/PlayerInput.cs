@@ -8,15 +8,15 @@ namespace Travail_2
 {
     class PlayerInput
     {
-        bool goLeft;
-        bool goRight;
-        bool goUp;
-        bool goDown;
-        int playerPositionX = 0;
-        int playerPositionY = 0;
-        int playerSpeed = 10;
-        int playerWidth = 90;
-        int playerHeight = 130;
+        private bool goLeft;
+        private bool goRight;
+        private bool goUp;
+        private bool goDown;
+        private int playerPositionX = 0;
+        private int playerPositionY = 0;
+        private int playerSpeed = 10;
+        private int playerWidth = 90;
+        private int playerHeight = 130;
 
         public PlayerInput()
         {

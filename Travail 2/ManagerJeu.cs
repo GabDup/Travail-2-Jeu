@@ -8,11 +8,11 @@ namespace Travail_2
 {
     class ManagerJeu
     {
-        PlayerInput playerInput;
-        List<Enemies> enemies;
-        Laser laser;
-        int mapWidth;
-        int mapHeight;
+        private PlayerInput playerInput;
+        private List<Enemies> enemies;
+        private Laser laser;
+        private int mapWidth;
+        private int mapHeight;
 
         public ManagerJeu(int MapWidth, int MapHeight)
         {

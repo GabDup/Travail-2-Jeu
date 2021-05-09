@@ -12,13 +12,13 @@ namespace Travail_2
 {
     public partial class frmJeu : Form
     {
-        Bitmap backgroundImage;
-        Bitmap spaceshipImage;
-        Bitmap asteroidImage;
-        Bitmap laserImage;
-        Bitmap gameImage;
-        Random random = new Random();
-        ManagerJeu managerJeu;
+        private Bitmap backgroundImage;
+        private Bitmap spaceshipImage;
+        private Bitmap asteroidImage;
+        private Bitmap laserImage;
+        private Bitmap gameImage;
+        private Random random = new Random();
+        private ManagerJeu managerJeu;
 
         public frmJeu()
         {

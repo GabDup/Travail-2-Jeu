@@ -9,11 +9,11 @@ namespace Travail_2
 {
     class Enemies
     {
-        int asteroidSpeed;
-        int positionY;
-        int positionX;
-        int asteroidWidth;
-        int asteroidHeight;
+        private int asteroidSpeed;
+        private int positionY;
+        private int positionX;
+        private int asteroidWidth;
+        private int asteroidHeight;
 
         public Enemies(int PositionX)
         {

@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Travail_2
 {
-    class Enemies
+    public class Enemies
     {
         private int asteroidSpeed;
         private int positionY;
@@ -15,9 +15,9 @@ namespace Travail_2
         private int asteroidWidth;
         private int asteroidHeight;
 
-        public Enemies(int PositionX)
+        public Enemies(int PositionX, int AsteroidSpeed)
         {
-            asteroidSpeed = 5;
+            asteroidSpeed = AsteroidSpeed;
             positionY = 0;
             positionX = PositionX;
             asteroidWidth = 50;

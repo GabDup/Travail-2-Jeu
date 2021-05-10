@@ -12,9 +12,12 @@ namespace Travail_2
 {
     public partial class frmTitre : Form
     {
+        private ManagerJeu managerJeu;
+
         public frmTitre()
         {
             InitializeComponent();
+            managerJeu = new ManagerJeu(1280, 720);
         }
 
         private void frmTitre_Load(object sender, EventArgs e)
@@ -32,13 +35,13 @@ namespace Travail_2
 
         private void btnParametre_Click(object sender, EventArgs e)
         {
-            frmParametre frm = new frmParametre();
+            frmParametre frm = new frmParametre(managerJeu);
             frm.ShowDialog();
         }
 
         private void btnJouer_Click(object sender, EventArgs e)
         {
-            frmJeu frm = new frmJeu();
+            frmJeu frm = new frmJeu(managerJeu);
             frm.ShowDialog();
         }
     }

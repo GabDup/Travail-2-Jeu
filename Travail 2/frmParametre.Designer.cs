@@ -44,7 +44,7 @@ namespace Travail_2
             this.btnFacile.TabIndex = 0;
             this.btnFacile.Text = "Facile";
             this.btnFacile.UseVisualStyleBackColor = true;
-            this.btnFacile.Click += new System.EventHandler(this.button1_Click);
+            this.btnFacile.Click += new System.EventHandler(this.btnFacile_Click);
             // 
             // btnDifficile
             // 
@@ -56,7 +56,7 @@ namespace Travail_2
             this.btnDifficile.TabIndex = 1;
             this.btnDifficile.Text = "Difficile";
             this.btnDifficile.UseVisualStyleBackColor = true;
-            this.btnDifficile.Click += new System.EventHandler(this.button2_Click);
+            this.btnDifficile.Click += new System.EventHandler(this.btnDifficile_Click);
             // 
             // btnMoyen
             // 
@@ -68,7 +68,7 @@ namespace Travail_2
             this.btnMoyen.TabIndex = 2;
             this.btnMoyen.Text = "Moyen";
             this.btnMoyen.UseVisualStyleBackColor = true;
-            this.btnMoyen.Click += new System.EventHandler(this.button3_Click);
+            this.btnMoyen.Click += new System.EventHandler(this.btnMoyen_Click);
             // 
             // frmParametre
             // 

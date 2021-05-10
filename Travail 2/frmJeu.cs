@@ -20,15 +20,14 @@ namespace Travail_2
         private Random random = new Random();
         private ManagerJeu managerJeu;
 
-        public frmJeu()
+        public frmJeu(ManagerJeu managerJeu)
         {
             InitializeComponent();
+            this.managerJeu = managerJeu;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            managerJeu = new ManagerJeu(this.Width,this.Height);
-            
             Image background = Image.FromFile("../../Images/bg_space_seamless_1.png");
             Image spaceship = Image.FromFile("../../Images/flashtestship.png");
             Image laser = Image.FromFile("../../Images/laser_beam.png");
@@ -40,7 +39,7 @@ namespace Travail_2
 
             for (int i = 0; i < 5; i++)
             {
-                Enemies nouveauAsteroid = new Enemies(random.Next(0, this.Width));
+                Enemies nouveauAsteroid = new Enemies(random.Next(0, this.Width), random.Next(4, 12) * managerJeu.GetDifficulte());
                 managerJeu.GetEnemies().Add(nouveauAsteroid);
             }
 
@@ -52,10 +51,11 @@ namespace Travail_2
             gameImage = new Bitmap(this.Width, this.Height);
 
             managerJeu.GetPlayerInput().SetPositionX(this.Width / 2 - managerJeu.GetPlayerInput().GetPlayerWidth() / 2);
-            managerJeu.GetPlayerInput().SetPositionY(this.Height / 2 - managerJeu.GetPlayerInput().GetPlayerHeight() / 2);
+            managerJeu.GetPlayerInput().SetPositionY(this.Height - managerJeu.GetPlayerInput().GetPlayerHeight());
 
             GameTimer.Start();
         }
+
         private void Draw()
         {
             gameImage.Dispose();
@@ -70,9 +70,11 @@ namespace Travail_2
                     graphics.DrawImage(asteroidImage, managerJeu.GetEnemies()[i].GetAsteroidPositionX(), managerJeu.GetEnemies()[i].GetAsteroidPositionY());
                 }
             }
+            lblScore.Text = managerJeu.GetScore().ToString();
 
             this.BackgroundImage = gameImage;
         }
+
         private void GameTimer_Tick(object sender, EventArgs e)
         {
             if (managerJeu.GetPlayerInput().GetGoLeft())
@@ -130,6 +132,7 @@ namespace Travail_2
             }
             else if (e.KeyCode == Keys.Escape)
             {
+                managerJeu.GetEnemies().Clear();
                 this.Dispose();
                 this.Close();
             }
@@ -157,6 +160,23 @@ namespace Travail_2
             {
                 managerJeu.GetPlayerInput().SetGoDown(false);
             }
+        }
+
+        private void Gameover()
+        {
+            MessageBox.Show("Gameover! : " + managerJeu.GetScore());
+            this.Dispose();
+            this.Close();
+        }
+
+        private void lblAddScore_Click(object sender, EventArgs e)
+        {
+            managerJeu.SetScore(50);
+        }
+
+        private void lblGameover_Click(object sender, EventArgs e)
+        {
+            Gameover();
         }
     }
 }

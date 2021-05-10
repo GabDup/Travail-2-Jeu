@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Travail_2
 {
-    class ManagerJeu
+    public class ManagerJeu
     {
         private PlayerInput playerInput;
         private List<Enemies> enemies;
         private Laser laser;
         private int mapWidth;
         private int mapHeight;
+        private int score;
+        private int difficulte;
 
         public ManagerJeu(int MapWidth, int MapHeight)
         {
@@ -21,6 +23,8 @@ namespace Travail_2
             laser = new Laser();
             mapWidth = MapWidth;
             mapHeight = MapHeight;
+            score = 0;
+            difficulte = 1;
         }
 
         public int GetMapWidth()
@@ -46,6 +50,26 @@ namespace Travail_2
         public PlayerInput GetPlayerInput()
         {            
             return playerInput;
+        }
+
+        public int GetScore()
+        {
+            return score;
+        }
+
+        public void SetScore(int Score)
+        {
+            score += Score;
+        }
+
+        public int GetDifficulte()
+        {
+            return difficulte;
+        }
+
+        public void SetDifficulte(int Difficulte)
+        {
+            difficulte = Difficulte;
         }
     }
 }

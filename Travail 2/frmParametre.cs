@@ -10,25 +10,32 @@ using System.Windows.Forms;
 
 namespace Travail_2
 {
+    
     public partial class frmParametre : Form
     {
-        public frmParametre()
+        private ManagerJeu managerJeu;
+
+        public frmParametre(ManagerJeu managerJeu)
         {
             InitializeComponent();
+            this.managerJeu = managerJeu;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnFacile_Click(object sender, EventArgs e)
         {
+            managerJeu.SetDifficulte(1);
             this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnMoyen_Click(object sender, EventArgs e)
         {
+            managerJeu.SetDifficulte(2);
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnDifficile_Click(object sender, EventArgs e)
         {
+            managerJeu.SetDifficulte(3);
             this.Close();
         }
     }

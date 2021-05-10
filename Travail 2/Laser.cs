@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace Travail_2
 {
-    class Laser
+    public class Laser
     {
         private int laserSpeed;
         private int laserWidth;
@@ -27,16 +27,19 @@ namespace Travail_2
 
         public int ChangerPositionY()
         {
-            return positionY = positionY + laserSpeed;
+            return positionY += laserSpeed;
         }
+
         public int GetAsteroidPositionY()
         {
             return positionY;
         }
+
         public int GetAsteroidPositionX()
         {
             return positionX;
         }
+
         public int GetAsteroidSpeed()
         {
             return laserSpeed;

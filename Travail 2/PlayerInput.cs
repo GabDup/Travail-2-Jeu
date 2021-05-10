@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Travail_2
 {
-    class PlayerInput
+    public class PlayerInput
     {
         private bool goLeft;
         private bool goRight;
         private bool goUp;
         private bool goDown;
-        private int playerPositionX = 0;
-        private int playerPositionY = 0;
-        private int playerSpeed = 10;
-        private int playerWidth = 90;
-        private int playerHeight = 130;
+        private int playerPositionX;
+        private int playerPositionY;
+        private int playerSpeed;
+        private int playerWidth;
+        private int playerHeight;
 
         public PlayerInput()
         {
@@ -26,7 +26,7 @@ namespace Travail_2
             goDown = false;
             playerPositionX = 0;
             playerPositionY = 0;
-            playerSpeed = 10;
+            playerSpeed = 20;
             playerWidth = 90;
             playerHeight = 130;
         }

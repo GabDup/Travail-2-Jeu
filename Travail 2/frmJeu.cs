@@ -20,8 +20,12 @@ namespace Travail_2
         private Random random = new Random();
         private ManagerJeu managerJeu;
         private RectangleF playerHitbox;
-        private List<RectangleF> ennemiesHitbox;
-        private List<RectangleF> lasersHitbox;
+        private List<RectangleF> ennemiesHitbox = new List<RectangleF>();
+        private List<RectangleF> lasersHitbox = new List<RectangleF>();
+        Image background = Image.FromFile("../../Images/bg_space_seamless_1.png");
+        Image spaceship = Image.FromFile("../../Images/flashtestship.png");
+        Image asteroid = Image.FromFile("../../Images/Asteroid.png");
+        Image laser = Image.FromFile("../../Images/laser_beam.png");
 
         public frmJeu(ManagerJeu managerJeu)
         {
@@ -31,51 +35,17 @@ namespace Travail_2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Image background = Image.FromFile("../../Images/bg_space_seamless_1.png");
-            Image spaceship = Image.FromFile("../../Images/flashtestship.png");
-            Image asteroid = Image.FromFile("../../Images/Asteroid.png");
-
             backgroundImage = new Bitmap(background, managerJeu.GetMapWidth(), managerJeu.GetMapHeight());
             spaceshipImage = new Bitmap(spaceship, managerJeu.GetPlayerInput().GetPlayerWidth(), managerJeu.GetPlayerInput().GetPlayerHeight());
-
-            playerHitbox = new RectangleF(50, 50, managerJeu.GetPlayerInput().GetPlayerWidth(), managerJeu.GetPlayerInput().GetPlayerHeight());
-            lasersHitbox = new List<RectangleF>();
-            ennemiesHitbox = new List<RectangleF>();
-
             gameImage = new Bitmap(this.Width, this.Height);
 
-            managerJeu.GetEnemies().Clear();
-            managerJeu.GetLasers().Clear();
-
-            for (int i = 0; i < 10; i++)
-            {
-                Enemies nouveauAsteroid = new Enemies(random.Next(0, this.Width), random.Next(5, 10) * managerJeu.GetDifficulte());
-                managerJeu.GetEnemies().Add(nouveauAsteroid);
-            }
-
-            for (int i = 0; i < 10; i++)
-            {
-                RectangleF nouveauHitboxAsteroid = new RectangleF(0, 0, managerJeu.GetEnemies()[i].GetAsteroidWidth(), managerJeu.GetEnemies()[i].GetAsteroidHeight());
-                nouveauHitboxAsteroid.Width = managerJeu.GetEnemies()[i].GetAsteroidWidth();
-                nouveauHitboxAsteroid.Height = managerJeu.GetEnemies()[i].GetAsteroidHeight();
-                ennemiesHitbox.Add(nouveauHitboxAsteroid);
-            }
-
-            for (int i = 0; i < managerJeu.GetLasers().Count; i++)
-            {
-                RectangleF nouveauHitboxLaser = new RectangleF(50, 50, managerJeu.GetLasers()[i].GetLaserWidth(), managerJeu.GetLasers()[i].GetLaserHeight());
-                nouveauHitboxLaser.Width = managerJeu.GetLasers()[i].GetLaserWidth();
-                nouveauHitboxLaser.Height = managerJeu.GetLasers()[i].GetLaserHeight();
-                ennemiesHitbox.Add(nouveauHitboxLaser);
-            }
-
-            for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
-            {
-                asteroidImage = new Bitmap(asteroid, managerJeu.GetEnemies()[i].GetAsteroidWidth(), managerJeu.GetEnemies()[i].GetAsteroidHeight());                
-            }
+            playerHitbox = new RectangleF(50, 50, managerJeu.GetPlayerInput().GetPlayerWidth(), managerJeu.GetPlayerInput().GetPlayerHeight());
 
             managerJeu.GetPlayerInput().SetPositionX(this.Width / 2 - managerJeu.GetPlayerInput().GetPlayerWidth() / 2);
             managerJeu.GetPlayerInput().SetPositionY(this.Height - managerJeu.GetPlayerInput().GetPlayerHeight());
+
+            managerJeu.GetEnemies().Clear();
+            managerJeu.GetLasers().Clear();
 
             GameTimer.Start();
         }
@@ -91,9 +61,9 @@ namespace Travail_2
 
                 for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
                 {
+                    asteroidImage = new Bitmap(asteroid, managerJeu.GetEnemies()[i].GetAsteroidWidth(), managerJeu.GetEnemies()[i].GetAsteroidHeight());
                     graphics.DrawImage(asteroidImage, managerJeu.GetEnemies()[i].GetAsteroidPositionX(), managerJeu.GetEnemies()[i].GetAsteroidPositionY());
                 }
-
                 for (int i = 0; i < managerJeu.GetLasers().Count; i++)
                 {
                     graphics.DrawImage(laserImage, managerJeu.GetLasers()[i].GetPositionX(), managerJeu.GetLasers()[i].GetPositionY());
@@ -101,12 +71,15 @@ namespace Travail_2
 
             }
             lblScore.Text = managerJeu.GetScore().ToString();
-
             this.BackgroundImage = gameImage;
         }
 
         private void GameTimer_Tick(object sender, EventArgs e)
         {
+            managerJeu.SpawnEnemy(random.Next(0, this.Width), random.Next(5, 15) * managerJeu.GetDifficulte());
+            GenerateEnemiesHitboxes();
+            GenerateLasersHitboxes();
+            UpdateHitboxes();
             if (managerJeu.GetPlayerInput().GetGoLeft())
             {
                 if (managerJeu.GetPlayerInput().GetPositionX() > 0)
@@ -135,14 +108,17 @@ namespace Travail_2
                     managerJeu.GetPlayerInput().SetPositionY(managerJeu.GetPlayerInput().GetPositionY() + managerJeu.GetPlayerInput().GetPlayerSpeed());
                 }
             }
+
             for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
             {
                 managerJeu.GetEnemies()[i].ChangerPositionY();
-                if (managerJeu.GetEnemies()[i].GetAsteroidPositionY() > 720)
+                if (managerJeu.GetEnemies()[i].GetAsteroidPositionY() > this.Height)
                 {
-                    managerJeu.GetEnemies()[i].RespawnEnemy(random.Next(0, this.Width), random.Next(5, 10) * managerJeu.GetDifficulte());
+                    managerJeu.GetEnemies().RemoveAt(i);
+                    ennemiesHitbox.RemoveAt(i);
                 }
             }
+
             for (int i = 0; i < ennemiesHitbox.Count; i++)
             {
                 if (playerHitbox.IntersectsWith(ennemiesHitbox[i]))
@@ -150,6 +126,7 @@ namespace Travail_2
                     Gameover();
                 }
             }
+
             managerJeu.DecreaseFireDelay();
             for (int i = 0; i < managerJeu.GetLasers().Count; i++)
             {
@@ -157,9 +134,22 @@ namespace Travail_2
                 if (managerJeu.GetLasers()[i].GetLaserPositionY() < 0)
                 {
                     managerJeu.GetLasers().RemoveAt(i);
+                    lasersHitbox.RemoveAt(i);
                 }
             }
-            UpdateHitboxes();
+
+            for (int i = 0; i < lasersHitbox.Count; i++)
+            {
+                for (int j = 0; j < ennemiesHitbox.Count; j++)
+                {
+                    if (lasersHitbox[i].IntersectsWith(ennemiesHitbox[j]))
+                    {
+                        managerJeu.GetEnemies().RemoveAt(j);
+                        managerJeu.GetLasers().RemoveAt(i);
+                        managerJeu.AddPoints();
+                    }
+                }
+            }
             Draw();
         }
 
@@ -187,9 +177,7 @@ namespace Travail_2
             }
             else if (e.KeyCode == Keys.Space)
             {
-                Image laser = Image.FromFile("../../Images/laser_beam.png");
                 managerJeu.Fire();
-
                 for (int i = 0; i < managerJeu.GetLasers().Count; i++)
                 {
                     laserImage = new Bitmap(laser, managerJeu.GetLasers()[i].GetLaserWidth(), managerJeu.GetLasers()[i].GetLaserHeight());
@@ -247,6 +235,7 @@ namespace Travail_2
                 RectangleF nouveauHitbox = lasersHitbox[i];
                 nouveauHitbox.X = managerJeu.GetLasers()[i].GetLaserPositionX();
                 nouveauHitbox.Y = managerJeu.GetLasers()[i].GetLaserPositionY();
+                lasersHitbox[i] = nouveauHitbox;
             }
 
             for (int i = 0; i < ennemiesHitbox.Count; i++)
@@ -255,6 +244,30 @@ namespace Travail_2
                 nouveauHitbox.X = managerJeu.GetEnemies()[i].GetAsteroidPositionX();
                 nouveauHitbox.Y = managerJeu.GetEnemies()[i].GetAsteroidPositionY();
                 ennemiesHitbox[i] = nouveauHitbox;
+            }
+        }
+
+        private void GenerateEnemiesHitboxes()
+        {
+            ennemiesHitbox.Clear();
+            for (int i = 0; i < managerJeu.GetEnemies().Count; i++)
+            {
+                RectangleF nouveauHitboxAsteroid = new RectangleF(0, 0, managerJeu.GetEnemies()[i].GetAsteroidWidth(), managerJeu.GetEnemies()[i].GetAsteroidHeight());
+                nouveauHitboxAsteroid.Width = managerJeu.GetEnemies()[i].GetAsteroidWidth();
+                nouveauHitboxAsteroid.Height = managerJeu.GetEnemies()[i].GetAsteroidHeight();
+                ennemiesHitbox.Add(nouveauHitboxAsteroid);
+            }
+        }
+
+        private void GenerateLasersHitboxes()
+        {
+            lasersHitbox.Clear();
+            for (int i = 0; i < managerJeu.GetLasers().Count; i++)
+            {
+                RectangleF nouveauHitboxLaser = new RectangleF(50, 50, managerJeu.GetLasers()[i].GetLaserWidth(), managerJeu.GetLasers()[i].GetLaserHeight());
+                nouveauHitboxLaser.Width = managerJeu.GetLasers()[i].GetLaserWidth();
+                nouveauHitboxLaser.Height = managerJeu.GetLasers()[i].GetLaserHeight();
+                lasersHitbox.Add(nouveauHitboxLaser);
             }
         }
     }

@@ -49,12 +49,5 @@ namespace Travail_2
         {
             return asteroidWidth;
         }
-
-        public void RespawnEnemy(int PositionX, int AsteroidSpeed)
-        {
-            positionY = -75;
-            positionX = PositionX;
-            asteroidSpeed = AsteroidSpeed;
-        }
     }
 }

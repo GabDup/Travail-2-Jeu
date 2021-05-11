@@ -16,6 +16,7 @@ namespace Travail_2
         private int score;
         private int difficulte;
         private int fireDelay;
+        private int enemySpawnDelay;
 
         public ManagerJeu(int MapWidth, int MapHeight)
         {
@@ -26,7 +27,8 @@ namespace Travail_2
             mapHeight = MapHeight;
             score = 0;
             difficulte = 1;
-            fireDelay = 15;
+            fireDelay = 15 * GetDifficulte();
+            enemySpawnDelay = 20;
         }
 
         public int GetMapWidth()
@@ -93,7 +95,21 @@ namespace Travail_2
             {
                 Laser newLaser = new Laser(GetPlayerInput().GetPositionX()+20,GetPlayerInput().GetPositionY()-30);
                 GetLasers().Add(newLaser);
-                fireDelay = 15;
+                fireDelay = 15 * GetDifficulte();
+            }
+        }
+
+        public void SpawnEnemy(int PositionX, int AsteroidSpeed)
+        {
+            if (enemySpawnDelay > 0)
+            {
+                enemySpawnDelay--;
+            }
+            else
+            {
+                Enemies newEnemy = new Enemies(PositionX, AsteroidSpeed);
+                GetEnemies().Add(newEnemy);
+                enemySpawnDelay = 20;
             }
         }
 

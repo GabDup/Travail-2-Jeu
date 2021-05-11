@@ -16,7 +16,7 @@ namespace Travail_2
 
         public Laser(int PositionX, int PositionY)
         {
-            laserSpeed = 10;
+            laserSpeed = 35;
             laserWidth = 50;
             laserHeight = 75;
             positionY = PositionY;

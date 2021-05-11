@@ -18,13 +18,12 @@ namespace Travail_2
         public Enemies(int PositionX, int AsteroidSpeed)
         {
             asteroidSpeed = AsteroidSpeed;
-            positionY = 0;
+            positionY = -75;
             positionX = PositionX;
             asteroidWidth = 50;
             asteroidHeight = 75;
         }
 
-        //fonction pour changer la positionY par rapport a la vitesse et regarder si il est en dehors de l'ecran, si oui, effacer dans la form
         public int ChangerPositionY()
         {
             return positionY += asteroidSpeed;
@@ -49,6 +48,13 @@ namespace Travail_2
         public int GetAsteroidWidth()
         {
             return asteroidWidth;
+        }
+
+        public void RespawnEnemy(int PositionX, int AsteroidSpeed)
+        {
+            positionY = -75;
+            positionX = PositionX;
+            asteroidSpeed = AsteroidSpeed;
         }
     }
 }

@@ -59,5 +59,15 @@ namespace Travail_2
         {
 
         }
+
+        public int GetLaserPositionX()
+        {
+            return positionX;
+        }
+
+        public int GetLaserPositionY()
+        {
+            return positionY;
+        }
     }
 }

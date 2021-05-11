@@ -53,7 +53,7 @@ namespace Travail_2
             this.btnDifficile.Location = new System.Drawing.Point(12, 140);
             this.btnDifficile.Name = "btnDifficile";
             this.btnDifficile.Size = new System.Drawing.Size(160, 58);
-            this.btnDifficile.TabIndex = 1;
+            this.btnDifficile.TabIndex = 2;
             this.btnDifficile.Text = "Difficile";
             this.btnDifficile.UseVisualStyleBackColor = true;
             this.btnDifficile.Click += new System.EventHandler(this.btnDifficile_Click);
@@ -65,7 +65,7 @@ namespace Travail_2
             this.btnMoyen.Location = new System.Drawing.Point(12, 76);
             this.btnMoyen.Name = "btnMoyen";
             this.btnMoyen.Size = new System.Drawing.Size(160, 58);
-            this.btnMoyen.TabIndex = 2;
+            this.btnMoyen.TabIndex = 1;
             this.btnMoyen.Text = "Moyen";
             this.btnMoyen.UseVisualStyleBackColor = true;
             this.btnMoyen.Click += new System.EventHandler(this.btnMoyen_Click);

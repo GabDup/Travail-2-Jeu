@@ -14,6 +14,7 @@ namespace Travail_2
         private int positionX;
         private int asteroidWidth;
         private int asteroidHeight;
+        private int asteroidScoreValue;
 
         public Enemies(int PositionX, int AsteroidSpeed)
         {
@@ -22,6 +23,7 @@ namespace Travail_2
             positionX = PositionX;
             asteroidWidth = 50;
             asteroidHeight = 75;
+            asteroidScoreValue = 25*AsteroidSpeed;
         }
 
         public int ChangerPositionY()
@@ -48,6 +50,10 @@ namespace Travail_2
         public int GetAsteroidWidth()
         {
             return asteroidWidth;
+        }
+        public int GetScoreValue()
+        {
+            return asteroidScoreValue;
         }
     }
 }

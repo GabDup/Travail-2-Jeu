@@ -131,7 +131,7 @@ namespace Travail_2
             for (int i = 0; i < managerJeu.GetLasers().Count; i++)
             {
                 managerJeu.GetLasers()[i].ChangerPositionY();
-                if (managerJeu.GetLasers()[i].GetLaserPositionY() < 0)
+                if (managerJeu.GetLasers()[i].GetLaserPositionY() < - laser.Height) //pour que le projectile ai le temps de sortir
                 {
                     managerJeu.GetLasers().RemoveAt(i);
                     lasersHitbox.RemoveAt(i);
@@ -140,13 +140,18 @@ namespace Travail_2
 
             for (int i = 0; i < lasersHitbox.Count; i++)
             {
+                bool laserDetruit = false;
                 for (int j = 0; j < ennemiesHitbox.Count; j++)
                 {
                     if (lasersHitbox[i].IntersectsWith(ennemiesHitbox[j]))
                     {
+                        managerJeu.AddPoints(managerJeu.GetEnemies()[j].GetScoreValue());
                         managerJeu.GetEnemies().RemoveAt(j);
-                        managerJeu.GetLasers().RemoveAt(i);
-                        managerJeu.AddPoints();
+                        if (laserDetruit == false) //code pour eviter le bug d'un laser qui touche 2 asteroid en même temps
+                        {
+                            managerJeu.GetLasers().RemoveAt(i);
+                            laserDetruit = true;
+                        }
                     }
                 }
             }
@@ -217,7 +222,7 @@ namespace Travail_2
 
         private void lblAddScore_Click(object sender, EventArgs e)
         {
-            managerJeu.AddPoints();
+            managerJeu.AddPoints(50);
         }
 
         private void lblGameover_Click(object sender, EventArgs e)

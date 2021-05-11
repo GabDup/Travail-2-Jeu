@@ -24,18 +24,21 @@ namespace Travail_2
         private void btnFacile_Click(object sender, EventArgs e)
         {
             managerJeu.SetDifficulte(1);
+            MessageBox.Show("Difficulté Facile selectionnée");
             this.Close();
         }
 
         private void btnMoyen_Click(object sender, EventArgs e)
         {
             managerJeu.SetDifficulte(2);
+            MessageBox.Show("Difficulté Moyen selectionnée");
             this.Close();
         }
 
         private void btnDifficile_Click(object sender, EventArgs e)
         {
             managerJeu.SetDifficulte(3);
+            MessageBox.Show("Difficulté Difficile selectionnée");
             this.Close();
         }
     }

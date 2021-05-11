@@ -66,9 +66,9 @@ namespace Travail_2
             score = Score;
         }
 
-        public void AddPoints()
+        public void AddPoints(int nombreDePointsAAjouter)
         {
-            score += 50;
+            score += nombreDePointsAAjouter;
         }
 
         public int GetDifficulte()

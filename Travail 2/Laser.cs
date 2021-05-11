@@ -11,23 +11,21 @@ namespace Travail_2
         private int laserSpeed;
         private int laserWidth;
         private int laserHeight;
-        private PlayerInput player;
         private int positionY;
         private int positionX;
 
-        public Laser()
+        public Laser(int PositionX, int PositionY)
         {
-            laserSpeed = 5;
+            laserSpeed = 10;
             laserWidth = 50;
             laserHeight = 75;
-            player = new PlayerInput();
-            positionY = player.GetPositionY();
-            positionX = player.GetPositionX();
+            positionY = PositionY;
+            positionX = PositionX;
         }
 
         public int ChangerPositionY()
         {
-            return positionY += laserSpeed;
+            return positionY -= laserSpeed;
         }
 
         public int GetAsteroidPositionY()
@@ -55,17 +53,22 @@ namespace Travail_2
             return laserWidth;
         }
 
-        public void Fire()
-        {
-
-        }
-
         public int GetLaserPositionX()
         {
             return positionX;
         }
 
         public int GetLaserPositionY()
+        {
+            return positionY;
+        }
+
+        public int GetPositionX()
+        {
+            return positionX;
+        }
+
+        public int GetPositionY()
         {
             return positionY;
         }

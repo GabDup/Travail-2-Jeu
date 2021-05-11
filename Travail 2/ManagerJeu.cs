@@ -10,21 +10,23 @@ namespace Travail_2
     {
         private PlayerInput playerInput;
         private List<Enemies> enemies;
-        private Laser laser;
+        private List<Laser> lasers;
         private int mapWidth;
         private int mapHeight;
         private int score;
         private int difficulte;
+        private int fireDelay;
 
         public ManagerJeu(int MapWidth, int MapHeight)
         {
             playerInput = new PlayerInput();
             enemies = new List<Enemies>();
-            laser = new Laser();
+            lasers = new List<Laser>();
             mapWidth = MapWidth;
             mapHeight = MapHeight;
             score = 0;
             difficulte = 1;
+            fireDelay = 15;
         }
 
         public int GetMapWidth()
@@ -42,9 +44,9 @@ namespace Travail_2
             return enemies;
         }
 
-        public Laser GetLaser()
+        public List<Laser> GetLasers()
         {
-            return laser;
+            return lasers;
         }
 
         public PlayerInput GetPlayerInput()
@@ -59,7 +61,12 @@ namespace Travail_2
 
         public void SetScore(int Score)
         {
-            score += Score;
+            score = Score;
+        }
+
+        public void AddPoints()
+        {
+            score += 50;
         }
 
         public int GetDifficulte()
@@ -70,6 +77,32 @@ namespace Travail_2
         public void SetDifficulte(int Difficulte)
         {
             difficulte = Difficulte;
+        }
+
+        public void ResetPlayerInput()
+        {
+            GetPlayerInput().SetGoLeft(false);
+            GetPlayerInput().SetGoDown(false);
+            GetPlayerInput().SetGoRight(false);
+            GetPlayerInput().SetGoUp(false);
+        }
+
+        public void Fire()
+        {
+            if (fireDelay <= 0)
+            {
+                Laser newLaser = new Laser(GetPlayerInput().GetPositionX()+20,GetPlayerInput().GetPositionY()-30);
+                GetLasers().Add(newLaser);
+                fireDelay = 15;
+            }
+        }
+
+        public void DecreaseFireDelay()
+        {
+            if (fireDelay > 0)
+            {
+                fireDelay--;
+            }
         }
     }
 }
